@@ -80,24 +80,34 @@ const Navbar = () => {
                             </Link>
                         </div>
 
-                        {isAuthenticated && (
-                            <div className="hidden sm:ml-6 sm:block">
-                                <div className="flex space-x-4">
-                                    <Link
-                                        to="/dashboard"
-                                        className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
-                                    >
-                                        {t('navbar.dashboard')}
-                                    </Link>
-                                    <Link
-                                        to="/reports"
-                                        className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
-                                    >
-                                        {t('navbar.report')}
-                                    </Link>
+                        {isAuthenticated &&
+                            ['user', 'maintainer', 'admin'].includes(
+                                user.role
+                            ) && (
+                                <div className="hidden sm:ml-6 sm:block">
+                                    <div className="flex space-x-4">
+                                        <Link
+                                            to="/reports"
+                                            className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                                        >
+                                            {t('navbar.report')}
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        {isAuthenticated &&
+                            ['maintainer', 'admin'].includes(user.role) && (
+                                <div className="hidden sm:ml-6 sm:block">
+                                    <div className="flex space-x-4">
+                                        <Link
+                                            to="/statistics"
+                                            className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                                        >
+                                            {t('navbar.statistics')}
+                                        </Link>
+                                    </div>
+                                </div>
+                            )}
                     </div>
 
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

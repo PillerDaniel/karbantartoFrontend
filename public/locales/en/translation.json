@@ -1,6 +1,6 @@
 {
     "navbar": {
-        "dashboard": "Dashboard",
+        "statistics": "Statistics",
         "report": "Reports",
         "logout": "Sign out",
         "login": "Login"

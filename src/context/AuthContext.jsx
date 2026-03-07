@@ -7,6 +7,8 @@ const AuthContext = createContext();
 import ErrorModal from '../components/modals/ErrorModal';
 import SuccesModal from '../components/modals/SuccesModal';
 
+import spinner from '../assets/spinner.svg';
+
 import axiosInstance from '../utils/axios';
 
 export const AuthProvider = ({ children }) => {
@@ -72,6 +74,14 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(false);
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#9db2bf]">
+                <img src={spinner} alt="Loading..." className="w-12 h-12" />
+            </div>
+        );
+    }
 
     return (
         <AuthContext.Provider

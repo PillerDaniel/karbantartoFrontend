@@ -87,6 +87,7 @@ const Login = () => {
                     />
                     <button
                         type="submit"
+                        disabled={loading}
                         className="w-full mb-3 bg-[#27374D] py-2.5 rounded-full text-white"
                     >
                         {loading

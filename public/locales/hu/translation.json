@@ -1,6 +1,6 @@
 {
     "navbar": {
-        "dashboard": "Vezérlőpult",
+        "statistics": "Statisztika",
         "report": "Hibajegyek",
         "logout": "Kijelentkezés",
         "login": "Bejelentkezés"
