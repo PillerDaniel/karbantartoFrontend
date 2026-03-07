@@ -3,15 +3,22 @@
         "statistics": "Statisztika",
         "report": "Hibajegyek",
         "logout": "Kijelentkezés",
-        "login": "Bejelentkezés"
+        "login": "Bejelentkezés",
+        "dashboard": "Vezérlőpult",
+        "register": "Regisztráció"
     },
     "login": {
         "title": "Bejelentkezés",
         "username": "Felhasználónév",
         "password": "Jelszó",
-        "username_placehlder": "Add meg a felhasználóneved.",
+        "username_placeholder": "Add meg a felhasználóneved.",
         "password_placeholder": "Add meg a jelszavad.",
         "buttontext": "Bejelentkezés",
         "buttontext_loading": "Bejelentkezés folyamatban..."
+    },
+    "unathorized": {
+        "title": "403 - Nincs jogosultságod megtekinteni ezt az oldalt.",
+        "message": "Nincs jogosultsága megtekinteni ezt az oldalt.",
+        "buttontext": "Vissza a főoldalra"
     }
 }

@@ -71,7 +71,7 @@ const Login = () => {
                         value={form.username}
                         className="w-full bg-[#27374D] border my-3 border-white outline-none rounded-full py-2.5 px-4 mb-3"
                         type="text"
-                        placeholder={t('login.username_placehlder')}
+                        placeholder={t('login.username_placeholder')}
                         onChange={handleChange}
                         required
                     />
@@ -88,7 +88,7 @@ const Login = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full mb-3 bg-[#27374D] py-2.5 rounded-full text-white"
+                        className="w-full mb-3 bg-[#27374D] py-2.5 rounded-full text-white cursor-pointer"
                     >
                         {loading
                             ? t('login.buttontext_loading')

@@ -7,11 +7,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //context
 import { AuthProvider } from './context/AuthContext';
 
+//protected route
+import ProtectedRoute from './routes/ProtectedRoute';
+
 //components
 import Navbar from './components/Navbar';
 
 //pages
 import Login from './Pages/Login';
+import Unathorized from './Pages/Unathorized';
+import UserDashboard from './Pages/UserDashboard';
+import MaintainerDashboard from './Pages/MaintainerDashboard';
+import Register from './Pages/Register';
 
 function App() {
     return (
@@ -22,6 +29,37 @@ function App() {
                     <main className="flex-grow">
                         <Routes>
                             <Route path="/login" element={<Login />} />
+                            <Route
+                                path="/unauthorized"
+                                element={<Unathorized />}
+                            />
+                            <Route
+                                path="/my-reports"
+                                element={
+                                    <ProtectedRoute
+                                        allowedRoles={['user', 'admin']}
+                                        element={<UserDashboard />}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/maintainer-dashboard"
+                                element={
+                                    <ProtectedRoute
+                                        allowedRoles={['maintainer', 'admin']}
+                                        element={<MaintainerDashboard />}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/register"
+                                element={
+                                    <ProtectedRoute
+                                        allowedRoles={['admin']}
+                                        element={<Register />}
+                                    />
+                                }
+                            />
                         </Routes>
                     </main>
                 </Router>

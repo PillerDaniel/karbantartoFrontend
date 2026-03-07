@@ -81,13 +81,11 @@ const Navbar = () => {
                         </div>
 
                         {isAuthenticated &&
-                            ['user', 'maintainer', 'admin'].includes(
-                                user.role
-                            ) && (
+                            ['user', 'admin'].includes(user.role) && (
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         <Link
-                                            to="/reports"
+                                            to="/my-reports"
                                             className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
                                         >
                                             {t('navbar.report')}
@@ -100,14 +98,26 @@ const Navbar = () => {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         <Link
-                                            to="/statistics"
+                                            to="/maintainer-dashboard"
                                             className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
                                         >
-                                            {t('navbar.statistics')}
+                                            {t('navbar.dashboard')}
                                         </Link>
                                     </div>
                                 </div>
                             )}
+                        {isAuthenticated && ['admin'].includes(user.role) && (
+                            <div className="hidden sm:ml-6 sm:block">
+                                <div className="flex space-x-4">
+                                    <Link
+                                        to="/register"
+                                        className="text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                                    >
+                                        {t('navbar.register')}
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -201,18 +211,32 @@ const Navbar = () => {
             {isAuthenticated && (
                 <DisclosurePanel className="sm:hidden bg-[#27374D] backdrop-blur-sm">
                     <div className="space-y-1 px-2 pt-2 pb-3">
-                        <Link
-                            to="/"
-                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-                        >
-                            {t('navbar.dashboard')}
-                        </Link>
-                        <Link
-                            to="/team"
-                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-                        >
-                            {t('navbar.report')}
-                        </Link>
+                        {isAuthenticated &&
+                            ['user', 'admin'].includes(user.role) && (
+                                <Link
+                                    to="/my-reports"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                                >
+                                    {t('navbar.report')}
+                                </Link>
+                            )}
+                        {isAuthenticated &&
+                            ['maintainer', 'admin'].includes(user.role) && (
+                                <Link
+                                    to="/maintainer-dashboard"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                                >
+                                    {t('navbar.dashboard')}
+                                </Link>
+                            )}
+                        {isAuthenticated && ['admin'].includes(user.role) && (
+                            <Link
+                                to="/register"
+                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                            >
+                                {t('navbar.register')}
+                            </Link>
+                        )}
                     </div>
                 </DisclosurePanel>
             )}
