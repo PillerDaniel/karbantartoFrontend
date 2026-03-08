@@ -43,5 +43,24 @@
         "title": "404 - Az oldal nem található.",
         "message": "A keresett oldal nem található.",
         "buttontext": "Vissza a főoldalra"
+    },
+    "maintainerDashboard": {
+        "open": "Nyitott",
+        "inProgress": "Folyamatban",
+        "done": "Kész",
+        "filter": "Szűrés",
+        "noReports": "Nincs megjeleníthető hibajegy",
+        "all": "Összes",
+        "assignedToMe": "Saját"
+    },
+    "maintainerCard": {
+        "priority": "Prioritás:",
+        "open": "Nyitott",
+        "inProgress": "Folyamatban",
+        "done": "Kész",
+        "unassigned": "Kezeletlen",
+        "admin": "Admin",
+        "maintainer": "Karbatrató",
+        "edit": "Szerkesztés"
     }
 }
