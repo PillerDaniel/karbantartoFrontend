@@ -80,5 +80,14 @@
         "submitButton": "Create Report",
         "submitButtonLoading": "Creating...",
         "cancelButton": "Cancel"
+    },
+    "register": {
+        "title": "Register a new user",
+        "username": "Username",
+        "email": "Email",
+        "emailPlaceholder": "example@example.com",
+        "lastName": "Last Name",
+        "firstName": "First Name",
+        "submitButton": "Register"
     }
 }

@@ -80,5 +80,14 @@
         "submitButton": "Létrehozás",
         "submitButtonLoading": "Létrehozás...",
         "cancelButton": "Mégse"
+    },
+    "register": {
+        "title": "Új felhasználó regisztrálása",
+        "username": "Felhasználónév",
+        "email": "E-mail cím",
+        "emailPlaceholder": "pelda@example.com",
+        "lastName": "Vezetéknév",
+        "firstName": "Keresztnév",
+        "submitButton": "Regisztrálás"
     }
 }

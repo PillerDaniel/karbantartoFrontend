@@ -10,7 +10,7 @@ const CreateReportModal = ({
     categories,
     onReportCreated,
 }) => {
-    const { showError } = useAuth();
+    const { showError, showSuccess } = useAuth();
     const { t, i18n } = useTranslation();
     const language = i18n.language.startsWith('hu') ? 'hu' : 'en';
 
@@ -27,12 +27,22 @@ const CreateReportModal = ({
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosInstance.post('/reports', {
+            const response = await axiosInstance.post('/reports', {
                 title,
                 description,
                 priority,
                 categoryId,
             });
+
+            language === 'hu'
+                ? showSuccess(
+                      language,
+                      response.data.messageHu || 'Sikeres regisztráció!'
+                  )
+                : showSuccess(
+                      language,
+                      response.data.messageEn || 'Registration successful!'
+                  );
 
             setTitle('');
             setDescription('');
