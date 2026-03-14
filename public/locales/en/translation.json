@@ -37,6 +37,9 @@
         "done": "Done",
         "filter": "Filter",
         "noReports": "No reports found.",
+        "status": "Status",
+        "priority": "Priority",
+        "category": "Category",
         "all": "All"
     },
     "notFound": {
@@ -51,7 +54,10 @@
         "filter": "Filter",
         "noReports": "No reports found.",
         "all": "All",
-        "assignedToMe": "Assigned to me"
+        "assignedToMe": "Assigned to me",
+        "status": "Status",
+        "priority": "Priority",
+        "category": "Category"
     },
     "maintainerCard": {
         "priority": "Priority:",

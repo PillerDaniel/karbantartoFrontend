@@ -37,6 +37,9 @@
         "done": "Kész",
         "filter": "Szűrés",
         "noReports": "Nincs megjeleníthető hibajegy",
+        "status": "Státusz",
+        "priority": "Prioritás",
+        "category": "Kategória",
         "all": "Összes"
     },
     "notFound": {
@@ -51,7 +54,10 @@
         "filter": "Szűrés",
         "noReports": "Nincs megjeleníthető hibajegy",
         "all": "Összes",
-        "assignedToMe": "Saját"
+        "assignedToMe": "Hozzám rendelt",
+        "status": "Státusz",
+        "priority": "Prioritás",
+        "category": "Kategória"
     },
     "maintainerCard": {
         "priority": "Prioritás:",

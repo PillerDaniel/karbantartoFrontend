@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 //components
 import MaintainerCard from '../components/MaintainerCard';
 
-import { PlusCircle, Funnel, Eraser } from 'phosphor-react';
+import { Funnel, Eraser } from 'phosphor-react';
 import { Pagination, Stack } from '@mui/material';
 
 import axiosInstance from '../utils/axios';
@@ -20,20 +20,49 @@ const MaintainerDashboard = () => {
     const language = i18n.language.startsWith('hu') ? 'hu' : 'en';
 
     const [reports, setReports] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
+    const [categoryId, setCategoryId] = useState('');
     const [managed, setManaged] = useState('false');
     const [filterParams, setFilterParams] = useState({
         status: '',
         priority: '',
         managed: 'false',
+        categoryId: '',
     });
 
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [limit, setLimit] = useState(12);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                setLoading(true);
+                const response = await axiosInstance.get('/categories');
+                setCategories(response.data);
+            } catch (error) {
+                language === 'hu'
+                    ? showError(
+                          language,
+                          error.response?.data?.messageHu ||
+                              'Hiba a kategóriák lekérése közben.'
+                      )
+                    : showError(
+                          language,
+                          error.response?.data?.messageEn ||
+                              'Error fetching categories.'
+                      );
+                setLoading(false);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     useEffect(() => {
         const fetchReports = async () => {
@@ -48,6 +77,7 @@ const MaintainerDashboard = () => {
                             page: page,
                             limit: limit,
                             managed: filterParams.managed || undefined,
+                            categoryId: filterParams.categoryId || undefined,
                         },
                     }
                 );
@@ -80,6 +110,7 @@ const MaintainerDashboard = () => {
             status: status,
             priority: priority,
             managed: managed,
+            categoryId: categoryId,
         });
     };
 
@@ -88,10 +119,12 @@ const MaintainerDashboard = () => {
         setPriority('');
         setManaged('false');
         setPage(1);
+        setCategoryId('');
         setFilterParams({
             status: '',
             priority: '',
             managed: 'false',
+            categoryId: '',
         });
     };
 
@@ -111,7 +144,7 @@ const MaintainerDashboard = () => {
                             value={status}
                         >
                             <option value="">
-                                {t('maintainerDashboard.all')}
+                                {t('maintainerDashboard.status')}
                             </option>
                             <option value="open">
                                 {t('maintainerDashboard.open')}
@@ -123,14 +156,13 @@ const MaintainerDashboard = () => {
                                 {t('maintainerDashboard.done')}
                             </option>
                         </select>
-
                         <select
                             className="bg-gray-50 border border-gray-200 text-[#27374D] text-sm rounded-lg focus:ring-[#526D82] focus:border-[#526D82] block p-2.5 outline-none"
                             onChange={(e) => setPriority(e.target.value)}
                             value={priority}
                         >
                             <option value="">
-                                {t('maintainerDashboard.all')}
+                                {t('maintainerDashboard.priority')}
                             </option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -138,7 +170,20 @@ const MaintainerDashboard = () => {
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-
+                        <select
+                            className="bg-gray-50 border border-gray-200 text-[#27374D] text-sm rounded-lg focus:ring-[#526D82] focus:border-[#526D82] block p-2.5 outline-none"
+                            onChange={(e) => setCategoryId(e.target.value)}
+                            value={categoryId}
+                        >
+                            <option value="">
+                                {t('maintainerDashboard.category')}
+                            </option>
+                            {categories.map((cat) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
+                            ))}
+                        </select>
                         <select
                             className="bg-gray-50 border border-gray-200 text-[#27374D] text-sm rounded-lg focus:ring-[#526D82] focus:border-[#526D82] block p-2.5 outline-none"
                             onChange={(e) => setManaged(e.target.value)}
@@ -151,7 +196,6 @@ const MaintainerDashboard = () => {
                                 {t('maintainerDashboard.assignedToMe')}
                             </option>
                         </select>
-
                         <button
                             onClick={handleFilterClick}
                             className="flex items-center justify-center bg-[#27374D] hover:bg-[#526D82] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm active:scale-95"
