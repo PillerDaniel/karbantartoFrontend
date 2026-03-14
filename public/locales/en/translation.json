@@ -68,5 +68,17 @@
         "admin": "Admin",
         "maintainer": "Maintainer",
         "edit": "Edit"
+    },
+    "createReportModal": {
+        "newReport": "New Report",
+        "title": "Title:",
+        "category": "Category:",
+        "pickCategory": "Pick a category..",
+        "priority": "Priority:",
+        "description": "Description:",
+        "descriptionPlaceholder": "Describe in detail what happened and where...",
+        "submitButton": "Create Report",
+        "submitButtonLoading": "Creating...",
+        "cancelButton": "Cancel"
     }
 }

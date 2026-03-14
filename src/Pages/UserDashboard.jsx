@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 //components
 import ReportCard from '../components/ReportCard';
+import CreateReportModal from '../components/modals/CreateReportModal';
 
 import { PlusCircle, Funnel, Eraser } from 'phosphor-react';
 import { Pagination, Stack } from '@mui/material';
@@ -22,6 +23,8 @@ const UserDashboard = () => {
     const [reports, setReports] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
@@ -62,39 +65,40 @@ const UserDashboard = () => {
         fetchCategories();
     }, []);
 
+    const fetchReports = async () => {
+        try {
+            setLoading(true);
+            const response = await axiosInstance.get(`/reports/user`, {
+                params: {
+                    status: filterParams.status || undefined,
+                    priority: filterParams.priority || undefined,
+                    categoryId: filterParams.categoryId || undefined,
+                    page: page,
+                    limit: limit,
+                },
+            });
+            setReports(response.data.reports);
+            setTotalPages(response.data.totalPages);
+            setLimit(response.data.limit);
+        } catch (error) {
+            language === 'hu'
+                ? showError(
+                      language,
+                      error.response?.data?.messageHu ||
+                          'Hiba a lekérdezés közben.'
+                  )
+                : showError(
+                      language,
+                      error.response?.data?.messageEn ||
+                          'Error fetching reports.'
+                  );
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchReports = async () => {
-            try {
-                setLoading(true);
-                const response = await axiosInstance.get(`/reports/user`, {
-                    params: {
-                        status: filterParams.status || undefined,
-                        priority: filterParams.priority || undefined,
-                        categoryId: filterParams.categoryId || undefined,
-                        page: page,
-                        limit: limit,
-                    },
-                });
-                setReports(response.data.reports);
-                setTotalPages(response.data.totalPages);
-                setLimit(response.data.limit);
-            } catch (error) {
-                language === 'hu'
-                    ? showError(
-                          language,
-                          error.response?.data?.messageHu ||
-                              'Hiba a lekérdezés közben.'
-                      )
-                    : showError(
-                          language,
-                          error.response?.data?.messageEn ||
-                              'Error fetching reports.'
-                      );
-                setLoading(false);
-            } finally {
-                setLoading(false);
-            }
-        };
         fetchReports();
     }, [filterParams, page, limit]);
 
@@ -125,6 +129,12 @@ const UserDashboard = () => {
 
     return (
         <>
+            <CreateReportModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                categories={categories}
+                onReportCreated={fetchReports}
+            />
             <div className="bg-[#27374D] border-b border-gray-100 p-6 mb-2 mt-4">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div></div>
@@ -178,7 +188,10 @@ const UserDashboard = () => {
                             ))}
                         </select>
 
-                        <button className="flex items-center justify-center bg-[#27374D] hover:bg-[#526D82] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm active:scale-95">
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="flex items-center justify-center bg-[#27374D] hover:bg-[#526D82] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm active:scale-95"
+                        >
                             <PlusCircle
                                 size={20}
                                 weight="bold"

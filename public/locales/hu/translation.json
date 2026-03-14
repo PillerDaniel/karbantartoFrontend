@@ -68,5 +68,17 @@
         "admin": "Admin",
         "maintainer": "Karbatrató",
         "edit": "Szerkesztés"
+    },
+    "createReportModal": {
+        "newReport": "Új hibajegy",
+        "title": "Cím:",
+        "category": "Kategória:",
+        "pickCategory": "Válassz egy kategóriát..",
+        "priority": "Prioritás:",
+        "description": "Leírás:",
+        "descriptionPlaceholder": "Írd le pontosan, hol és mi történt...",
+        "submitButton": "Létrehozás",
+        "submitButtonLoading": "Létrehozás...",
+        "cancelButton": "Mégse"
     }
 }

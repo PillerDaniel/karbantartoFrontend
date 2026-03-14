@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
             } catch (error) {
                 setUser(null);
                 setIsAuthenticated(false);
+                logout();
             } finally {
                 setLoading(false);
             }
